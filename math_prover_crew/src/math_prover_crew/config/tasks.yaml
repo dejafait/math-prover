@@ -1,0 +1,64 @@
+research_task:
+  description: >
+    Conduct a thorough research about the current state of the Riemann Hypothesis.
+    Look for the latest papers, major approaches, known obstacles, and any significant 
+    developments. The current year is 2026.
+  expected_output: >
+    A list with 40-50 bullet points of the most relevant and up-to-date information 
+    about the Riemann Hypothesis, including key references and important results.
+  agent: researcher
+
+conjecture_task:
+  description: >
+    Based on the research summary, generate original, creative ideas or 
+    unexpected connections that could potentially help prove the Riemann Hypothesis.
+    Think outside the box (e.g. links to new approaches).
+  expected_output: >
+    A numbered list of 40-50 concrete conjectures or novel angles, each with a short 
+    explanation of why it might be promising.
+  agent: conjecturer
+
+testing_task:
+  description: >
+    You receive a set of novel ideas and approaches generated from the previous step for the Riemann Hypothesis. 
+    For each idea, explore it with maximum depth and intellectual intensity. 
+    Push the concept to its logical extremes: derive consequences, examine compatibility 
+    with known results about the zeta function, look for hidden contradictions, 
+    explore possible generalizations, and evaluate whether this direction could 
+    realistically contribute to a full proof or disproof of the Riemann Hypothesis. 
+    Think very hard — do not give shallow feedback.
+  expected_output: >
+    A detailed, high-quality analysis for each individual idea with the following structure:
+    - Idea summary (one sentence)
+    - Deep exploration of implications and consequences
+    - Strongest possible arguments in favor (why it might work)
+    - Most serious objections and potential breaking points
+    - Overall verdict: promising direction, partial progress, or dead end
+    - Specific suggestions for how to strengthen or refute it further
+    Be rigorous, exhaustive, and always keep the ultimate goal of proving or disproving RH in mind.
+  agent: tester
+
+critic_task:
+  description: >
+    Critically review all previous outputs (research, conjectures, and tests). 
+    Find every logical gap, mathematical contradiction, or reason why an idea is 
+    unlikely to lead to a full proof of the Riemann Hypothesis.
+  expected_output: >
+    An honest, sharp assessment for each idea: strengths, fatal weaknesses, and 
+    overall likelihood of success. Be ruthless.
+  agent: critic
+
+reporting_task:
+  description: >
+    Compile all previous results (research, conjectures, tests, and criticism) 
+    into a professional, well-structured final report about the Riemann Hypothesis.
+  expected_output: >
+    A complete, well-organized markdown report with the following sections:
+    - Executive Summary
+    - Current State of Research
+    - Novel Ideas Proposed
+    - Numerical Testing & Potential Failures
+    - Critical Assessment
+    - Recommendations for Next Steps
+    Formatted cleanly as markdown without code blocks.
+  agent: reporting_analyst

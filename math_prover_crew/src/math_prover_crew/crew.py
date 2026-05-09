@@ -63,31 +63,35 @@ class MathProverCrew():
     def research_task(self) -> Task:
         return Task(
             config=self.tasks_config['research_task'], # type: ignore[index]
+            output_file='report_task1_research.md',
         )
 
     @task
     def conjecture_task(self) -> Task:
         return Task(
             config=self.tasks_config['conjecture_task'], # type: ignore[index]
+            output_file='report_task2_conjecture.md',
         )
 
     @task
     def testing_task(self) -> Task:
         return Task(
             config=self.tasks_config['testing_task'], # type: ignore[index]
+            output_file='report_task3_testing.md',
         )
 
     @task
     def critic_task(self) -> Task:
         return Task(
             config=self.tasks_config['critic_task'], # type: ignore[index]
+            output_file='report_task4_critic.md',
         )
 
     @task
     def reporting_task(self) -> Task:
         return Task(
             config=self.tasks_config['reporting_task'], # type: ignore[index]
-            output_file='report.md'
+            output_file='report_task5_reporting.md',
         )
 
     @crew

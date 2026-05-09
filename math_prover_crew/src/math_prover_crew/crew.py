@@ -21,11 +21,13 @@ local_llm = LLM(
     api_key="ollama",
 )
 
-current_llm = pro_llm
+current_llm = local_llm
+# current_llm = pro_llm
 
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+verbose_agent = True
+verbose_task = True
+verbose_crew = True
+
 @CrewBase
 class MathProverCrew():
     """MathProverCrew crew"""
@@ -37,47 +39,44 @@ class MathProverCrew():
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
     # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
    
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
-
     @agent
     def researcher(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
+            config=self.agents_config['researcher'],
             llm=current_llm,
-            verbose=True
+            verbose=verbose_agent,
         )
 
     @agent
     def conjecturer(self) -> Agent:
         return Agent(
-            config=self.agents_config['conjecturer'], # type: ignore[index]
+            config=self.agents_config['conjecturer'],
             llm=current_llm,
-            verbose=True
+            verbose=verbose_agent,
         )
 
     @agent
     def tester(self) -> Agent:
         return Agent(
-            config=self.agents_config['tester'], # type: ignore[index]
-            llm=current_llm,                        # GPT-5.5 Pro + xhigh deep thinking
-            verbose=True
+            config=self.agents_config['tester'],
+            llm=current_llm,
+            verbose=verbose_agent,
         )
 
     @agent
     def critic(self) -> Agent:
         return Agent(
-            config=self.agents_config['critic'], # type: ignore[index]
-            llm=current_llm,                        # GPT-5.5 Pro + xhigh deep thinking
-            verbose=True
+            config=self.agents_config['critic'],
+            llm=current_llm,
+            verbose=verbose_agent,
         )
 
     @agent
     def reporting_analyst(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
+            config=self.agents_config['reporting_analyst'],
             llm=current_llm,
-            verbose=True
+            verbose=verbose_agent,
         )
 
     # To learn more about structured task outputs,
@@ -87,36 +86,41 @@ class MathProverCrew():
     @task
     def research_task(self) -> Task:
         return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+            config=self.tasks_config['research_task'],
             output_file='report_task1_research.md',
+            verbose=verbose_task,
         )
 
     @task
     def conjecture_task(self) -> Task:
         return Task(
-            config=self.tasks_config['conjecture_task'], # type: ignore[index]
+            config=self.tasks_config['conjecture_task'],
             output_file='report_task2_conjecture.md',
+            verbose=verbose_task,
         )
 
     @task
     def testing_task(self) -> Task:
         return Task(
-            config=self.tasks_config['testing_task'], # type: ignore[index]
+            config=self.tasks_config['testing_task'],
             output_file='report_task3_testing.md',
+            verbose=verbose_task,
         )
 
     @task
     def critic_task(self) -> Task:
         return Task(
-            config=self.tasks_config['critic_task'], # type: ignore[index]
+            config=self.tasks_config['critic_task'],
             output_file='report_task4_critic.md',
+            verbose=verbose_task,
         )
 
     @task
     def reporting_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
+            config=self.tasks_config['reporting_task'],
             output_file='report_task5_reporting.md',
+            verbose=verbose_task,
         )
 
     @crew
@@ -126,9 +130,10 @@ class MathProverCrew():
         # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
         return Crew(
-            agents=self.agents, # Automatically created by the @agent decorator
-            tasks=self.tasks, # Automatically created by the @task decorator
+            agents=self.agents,
+            tasks=self.tasks,
             process=Process.sequential,
-            verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
+            verbose=verbose_crew,
+            # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
+            # process=Process.hierarchical,
         )

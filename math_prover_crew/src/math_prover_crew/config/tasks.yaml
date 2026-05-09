@@ -12,7 +12,7 @@ conjecture_task:
   description: >
     Based on the research summary, generate original, creative ideas or 
     unexpected connections that could potentially help prove the Riemann Hypothesis.
-    Think outside the box (e.g. links to fractals, L-functions and other unexpected fields).
+    Think outside the box (e.g. links to new approaches).
   expected_output: >
     A numbered list of 40-50 concrete conjectures or novel angles, each with a short 
     explanation of why it might be promising.

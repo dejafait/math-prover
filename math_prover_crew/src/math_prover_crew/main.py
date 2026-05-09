@@ -23,7 +23,15 @@ def run():
     }
 
     try:
-        MathProverCrew().crew().kickoff(inputs=inputs)
+        result = MathProverCrew().crew().kickoff(inputs=inputs)
+        print("\n" + "="*70)
+        print("TOKEN USAGE & COST REPORT")
+        print("="*70)
+        print(f"Total Tokens     : {result.token_usage.total_tokens:,}")
+        print(f"Input Tokens     : {result.token_usage.prompt_tokens:,}")
+        print(f"Output Tokens    : {result.token_usage.completion_tokens:,}")
+        print(f"Reasoning Tokens : {getattr(result.token_usage, 'reasoning_tokens', 'N/A')}")
+        print("="*70)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
